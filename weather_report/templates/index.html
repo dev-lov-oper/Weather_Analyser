@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Weather App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-page:     #f0f4f8;
+      --bg-nav:      #ffffff;
+      --bg-card:     #ffffff;
+      --bg-header:   #EBF4FF;
+      --bg-input:    #ffffff;
+      --bg-toggle:   #f0f4f8;
+      --bg-badge:    #EBF4FF;
+      --border-nav:  #e2e8f0;
+      --border-card: #e2e8f0;
+      --border-head: #BEE3F8;
+      --border-row:  #f0f4f8;
+      --border-inp:  #cbd5e0;
+      --border-tog:  #cbd5e0;
+      --border-bdg:  #BEE3F8;
+      --text-title:  #1a202c;
+      --text-city:   #1a365d;
+      --text-muted:  #718096;
+      --text-val:    #2d3748;
+      --text-country:#2B6CB0;
+      --text-badge:  #2B6CB0;
+      --text-icon:   #2B6CB0;
+      --text-tog:    #4a5568;
+      --country-bg:  #BEE3F8;
+      --accent:      #378ADD;
+      --accent-dark: #185FA5;
+    }
+
+    body.dark {
+      --bg-page:     #0f1117;
+      --bg-nav:      #1a1d27;
+      --bg-card:     #1a1d27;
+      --bg-header:   #0d1f35;
+      --bg-input:    #1a1d27;
+      --bg-toggle:   #252836;
+      --bg-badge:    #0d1f35;
+      --border-nav:  #2d3148;
+      --border-card: #2d3148;
+      --border-head: #1a3a5c;
+      --border-row:  #252836;
+      --border-inp:  #2d3148;
+      --border-tog:  #3a3f5c;
+      --border-bdg:  #1a3a5c;
+      --text-title:  #e2e8f0;
+      --text-city:   #BEE3F8;
+      --text-muted:  #718096;
+      --text-val:    #e2e8f0;
+      --text-country:#63B3ED;
+      --text-badge:  #63B3ED;
+      --text-icon:   #63B3ED;
+      --text-tog:    #a0aec0;
+      --country-bg:  #1a3a5c;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-page);
+      min-height: 100vh;
+      transition: background 0.2s;
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      background: var(--bg-nav);
+      border-bottom: 1px solid var(--border-nav);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .navbar-icon { font-size: 22px; color: var(--accent); }
+    .navbar-title { font-size: 17px; font-weight: 600; color: var(--text-title); flex: 1; }
+
+    /* ── Dark mode toggle ── */
+    .toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-toggle);
+      border: 1px solid var(--border-tog);
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--text-tog);
+      font-family: 'Inter', sans-serif;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .toggle-btn i { font-size: 15px; }
+    .toggle-btn:hover { background: var(--border-inp); }
+
+    /* ── Layout ── */
+    .container { max-width: 500px; margin: 0 auto; padding: 2.5rem 1rem; }
+
+    /* ── Search ── */
+    .search-row {
+      display: flex;
+      border: 1px solid var(--border-inp);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-input);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .search-row input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 0.75rem 1rem;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-title);
+      outline: none;
+    }
+    .search-row input::placeholder { color: #a0aec0; }
+    .search-row button {
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      padding: 0 1.25rem;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: background 0.15s;
+    }
+    .search-row button:hover { background: var(--accent-dark); }
+
+    /* ── Alert ── */
+    .alert-error {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      background: #fff5f5;
+      border: 1px solid #fed7d7;
+      color: #c53030;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    body.dark .alert-error {
+      background: #2d1515;
+      border-color: #5c2020;
+      color: #fc8181;
+    }
+
+    /* ── Weather Card ── */
+    .weather-card {
+      margin-top: 1.75rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .card-header {
+      background: var(--bg-header);
+      border-bottom: 1px solid var(--border-head);
+      padding: 2rem 1.5rem 1.5rem;
+      text-align: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .card-header .big-icon {
+      font-size: 52px;
+      color: var(--text-icon);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .card-city { font-size: 26px; font-weight: 600; color: var(--text-city); }
+    .card-country {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      color: var(--text-country);
+      background: var(--country-bg);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .card-body { padding: 0.5rem 1.5rem 1rem; }
+
+    .data-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border-row);
+      transition: border-color 0.2s;
+    }
+    .data-row:last-child { border-bottom: none; }
+
+    .data-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .data-label i { font-size: 16px; }
+    .data-val { font-size: 14px; font-weight: 600; color: var(--text-val); }
+
+    .desc-badge {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 20px;
+      background: var(--bg-badge);
+      color: var(--text-badge);
+      border: 1px solid var(--border-bdg);
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <i class="ti ti-cloud navbar-icon" aria-hidden="true"></i>
+    <span class="navbar-title">Weather Detector</span>
+    <button class="toggle-btn" onclick="toggleDark()" id="toggle-btn" aria-label="Toggle dark mode">
+      <i class="ti ti-moon" id="toggle-icon" aria-hidden="true"></i>
+      <span id="toggle-label">Dark mode</span>
+    </button>
+  </nav>
+
+  <div class="container">
+    <form action="" method="post">
+      {% csrf_token %}
+      <div class="search-row">
+        <input type="text" name="city" placeholder="Enter city name...">
+        <button type="submit" aria-label="Search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+        </button>
+      </div>
+    </form>
+
+    {% if error_message %}
+    <div class="alert-error">
+      <i class="ti ti-alert-circle" aria-hidden="true"></i>
+      {{ error_message }}
+    </div>
+    {% endif %}
+
+    {% if data.country_code %}
+    <div class="weather-card">
+      <div class="card-header">
+        <i class="ti ti-cloud-storm big-icon" aria-hidden="true"></i>
+        <p class="card-city">{{ city }}</p>
+        <span class="card-country">{{ data.country_code }}</span>
+      </div>
+      <div class="card-body">
+        <div class="data-row">
+          <span class="data-label"><i class="ti ti-map-pin" aria-hidden="true"></i> Coordinates</span>
+          <span class="data-val">{{ data.coordinate }}</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label"><i class="ti ti-temperature" aria-hidden="true"></i> Temperature</span>
+          <span class="data-val">{{ data.temp }}</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label"><i class="ti ti-gauge" aria-hidden="true"></i> Pressure</span>
+          <span class="data-val">{{ data.pressure }}</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label"><i class="ti ti-droplet" aria-hidden="true"></i> Humidity</span>
+          <span class="data-val">{{ data.humidity }}</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label"><i class="ti ti-wind" aria-hidden="true"></i> Description</span>
+          <span class="desc-badge">{{ data.description }}</span>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  <script>
+    const btn = document.getElementById('toggle-btn');
+    const icon = document.getElementById('toggle-icon');
+    const label = document.getElementById('toggle-label');
+    let dark = localStorage.getItem('wa-dark') === 'true';
+
+    function applyMode() {
+      document.body.classList.toggle('dark', dark);
+      icon.className = dark ? 'ti ti-sun' : 'ti ti-moon';
+      label.textContent = dark ? 'Light mode' : 'Dark mode';
+    }
+
+    function toggleDark() {
+      dark = !dark;
+      localStorage.setItem('wa-dark', dark);
+      applyMode();
+    }
+
+    applyMode();
+  </script>
+
+</body>
+</html>
