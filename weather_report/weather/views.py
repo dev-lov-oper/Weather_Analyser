@@ -16,7 +16,7 @@ def index(request):
         else:
             # error handlling for API call and data processing
             try:
-                api_key = '52526fd4c64e39df9b07c44e9de8bdd9'
+                api_key = '//paste here'
                 url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}'
                 res = urllib.request.urlopen(url, timeout=5).read()
                 json_data = json.loads(res)
