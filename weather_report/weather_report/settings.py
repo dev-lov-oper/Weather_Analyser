@@ -71,6 +71,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'weather_report.wsgi.application'
 
+ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
+
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
