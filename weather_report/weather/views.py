@@ -14,6 +14,7 @@ def index(request):
         if not city:
             error_message = "Please enter a city name"
         else:
+            # error handlling for API call and data processing
             try:
                 api_key = '52526fd4c64e39df9b07c44e9de8bdd9'
                 url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}'
@@ -28,7 +29,9 @@ def index(request):
                     "pressure": str(json_data['main']['pressure']), 
                     "humidity": str(json_data['main']['humidity']),
                     "description": str(json_data['weather'][0]['description']),
+                    "precipitation": str(json_data['clouds']['all']) + '%'
                 }
+
             except urllib.error.HTTPError as e:
                 if e.code == 404:
                     error_message = f"City '{city}' not found. Please check the spelling."
