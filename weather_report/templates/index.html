@@ -10,57 +10,28 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-page:     #f0f4f8;
-      --bg-nav:      #ffffff;
-      --bg-card:     #ffffff;
-      --bg-header:   #EBF4FF;
-      --bg-input:    #ffffff;
-      --bg-toggle:   #f0f4f8;
-      --bg-badge:    #EBF4FF;
-      --border-nav:  #e2e8f0;
-      --border-card: #e2e8f0;
-      --border-head: #BEE3F8;
-      --border-row:  #f0f4f8;
-      --border-inp:  #cbd5e0;
-      --border-tog:  #cbd5e0;
-      --border-bdg:  #BEE3F8;
-      --text-title:  #1a202c;
-      --text-city:   #1a365d;
-      --text-muted:  #718096;
-      --text-val:    #2d3748;
-      --text-country:#2B6CB0;
-      --text-badge:  #2B6CB0;
-      --text-icon:   #2B6CB0;
-      --text-tog:    #4a5568;
-      --country-bg:  #BEE3F8;
-      --accent:      #378ADD;
-      --accent-dark: #185FA5;
+      --bg-page:    #f0f4f8;
+      --bg-nav:     #ffffff;
+      --bg-card:    #ffffff;
+      --bg-input:   #ffffff;
+      --border:     #e2e8f0;
+      --border-sec: #cbd5e0;
+      --text-pri:   #1a202c;
+      --text-sec:   #718096;
+      --text-ter:   #a0aec0;
+      --accent:     #378ADD;
+      --accent-dk:  #185FA5;
     }
-
     body.dark {
-      --bg-page:     #0f1117;
-      --bg-nav:      #1a1d27;
-      --bg-card:     #1a1d27;
-      --bg-header:   #0d1f35;
-      --bg-input:    #1a1d27;
-      --bg-toggle:   #252836;
-      --bg-badge:    #0d1f35;
-      --border-nav:  #2d3148;
-      --border-card: #2d3148;
-      --border-head: #1a3a5c;
-      --border-row:  #252836;
-      --border-inp:  #2d3148;
-      --border-tog:  #3a3f5c;
-      --border-bdg:  #1a3a5c;
-      --text-title:  #e2e8f0;
-      --text-city:   #BEE3F8;
-      --text-muted:  #718096;
-      --text-val:    #e2e8f0;
-      --text-country:#63B3ED;
-      --text-badge:  #63B3ED;
-      --text-icon:   #63B3ED;
-      --text-tog:    #a0aec0;
-      --country-bg:  #1a3a5c;
+      --bg-page:    #0f1117;
+      --bg-nav:     #1a1d27;
+      --bg-card:    #1a1d27;
+      --bg-input:   #1a1d27;
+      --border:     #2d3148;
+      --border-sec: #3a3f5c;
+      --text-pri:   #e2e8f0;
+      --text-sec:   #718096;
+      --text-ter:   #4a5568;
     }
 
     body {
@@ -70,174 +41,151 @@
       transition: background 0.2s;
     }
 
-    /* ── Navbar ── */
     .navbar {
       background: var(--bg-nav);
-      border-bottom: 1px solid var(--border-nav);
-      padding: 1rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1.25rem;
+      display: flex; align-items: center; gap: 10px;
       transition: background 0.2s, border-color 0.2s;
     }
-    .navbar-icon { font-size: 22px; color: var(--accent); }
-    .navbar-title { font-size: 17px; font-weight: 600; color: var(--text-title); flex: 1; }
-
-    /* ── Dark mode toggle ── */
-    .toggle-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--bg-toggle);
-      border: 1px solid var(--border-tog);
-      border-radius: 20px;
-      padding: 5px 12px;
-      font-size: 12px;
-      font-weight: 500;
-      cursor: pointer;
-      color: var(--text-tog);
-      font-family: 'Inter', sans-serif;
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
-    }
-    .toggle-btn i { font-size: 15px; }
-    .toggle-btn:hover { background: var(--border-inp); }
-
-    /* ── Layout ── */
-    .container { max-width: 500px; margin: 0 auto; padding: 2.5rem 1rem; }
-
-    /* ── Search ── */
-    .search-row {
-      display: flex;
-      border: 1px solid var(--border-inp);
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--bg-input);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .search-row input {
-      flex: 1;
-      border: none;
-      background: transparent;
-      padding: 0.75rem 1rem;
-      font-size: 15px;
-      font-family: 'Inter', sans-serif;
-      color: var(--text-title);
-      outline: none;
-    }
-    .search-row input::placeholder { color: #a0aec0; }
-    .search-row button {
-      border: none;
+    .nav-avatar {
+      width: 34px; height: 34px; border-radius: 50%;
       background: var(--accent);
-      color: #fff;
-      padding: 0 1.25rem;
-      font-size: 20px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      transition: background 0.15s;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 17px; flex-shrink: 0;
     }
-    .search-row button:hover { background: var(--accent-dark); }
+    .nav-text { flex: 1; }
+    .nav-title { font-size: 14px; font-weight: 600; color: var(--text-pri); line-height: 1.2; }
+    .nav-sub   { font-size: 11px; color: var(--text-sec); }
+    .toggle-btn {
+      display: flex; align-items: center; gap: 5px;
+      background: transparent;
+      border: 1px solid var(--border-sec);
+      border-radius: 20px; padding: 5px 11px;
+      font-size: 11px; font-weight: 500; cursor: pointer;
+      color: var(--text-sec); font-family: 'Inter', sans-serif;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .toggle-btn i { font-size: 13px; }
 
-    /* ── Alert ── */
+    .container { max-width: 440px; margin: 0 auto; padding: 1.25rem 1rem 2rem; }
+
+    .search-row {
+      display: flex; align-items: center;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0 0.5rem 0 0.9rem;
+      margin-bottom: 1.2rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .search-row i.si { font-size: 16px; color: var(--text-ter); margin-right: 6px; }
+    .search-row input {
+      flex: 1; border: none; background: transparent;
+      padding: 0.65rem 0; font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-pri); outline: none;
+    }
+    .search-row input::placeholder { color: var(--text-ter); }
+    .search-row button {
+      border: none; background: var(--accent); color: #fff;
+      border-radius: 8px; padding: 6px 14px; font-size: 18px;
+      cursor: pointer; display: flex; align-items: center;
+      margin: 4px 0; transition: background 0.15s;
+    }
+    .search-row button:hover { background: var(--accent-dk); }
+
     .alert-error {
-      margin-top: 1rem;
-      padding: 0.75rem 1rem;
-      border-radius: 10px;
-      background: #fff5f5;
-      border: 1px solid #fed7d7;
-      color: #c53030;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      display: flex; align-items: center; gap: 8px;
+      padding: 0.65rem 1rem; border-radius: 10px;
+      background: #fff5f5; border: 1px solid #fed7d7;
+      color: #c53030; font-size: 13px; margin-bottom: 1rem;
     }
-    body.dark .alert-error {
-      background: #2d1515;
-      border-color: #5c2020;
-      color: #fc8181;
-    }
+    body.dark .alert-error { background: #2d1515; border-color: #5c2020; color: #fc8181; }
 
-    /* ── Weather Card ── */
+    /* ── Hero Card ── */
+    .hero-card {
+      border-radius: 14px; overflow: hidden;
+      margin-bottom: 1rem;
+      position: relative; min-height: 165px;
+      display: flex; align-items: flex-end; padding: 1.1rem;
+    }
+    .hero-img {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: background-image 0.4s;
+    }
+    /* fallback solid if image fails */
+    .hero-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: #1c2a3a;
+      z-index: -1;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.1) 100%);
+    }
+    .hero-country {
+      position: absolute; top: 12px; right: 12px;
+      background: var(--accent); color: #fff;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+      padding: 3px 9px; border-radius: 6px; z-index: 2;
+    }
+    .hero-content { position: relative; z-index: 2; flex: 1; }
+    .hero-loc {
+      display: flex; align-items: center; gap: 4px;
+      color: rgba(255,255,255,0.6); font-size: 11px; margin-bottom: 4px;
+    }
+    .hero-loc i { font-size: 13px; }
+    .hero-city { font-size: 22px; font-weight: 600; color: #fff; margin: 0 0 7px; }
+    .hero-desc {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.9);
+      font-size: 11px; padding: 3px 9px; border-radius: 20px;
+    }
+    .hero-desc i { font-size: 13px; }
+    .hero-temp {
+      position: relative; z-index: 2;
+      font-size: 56px; font-weight: 600; color: #fff;
+      line-height: 1; align-self: flex-end;
+    }
+    .hero-temp sup { font-size: 22px; font-weight: 400; vertical-align: super; line-height: 0; }
+
+    /* ── Data Card ── */
     .weather-card {
-      margin-top: 1.75rem;
       background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 16px;
-      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden;
       transition: background 0.2s, border-color 0.2s;
     }
-
-    .card-header {
-      background: var(--bg-header);
-      border-bottom: 1px solid var(--border-head);
-      padding: 2rem 1.5rem 1.5rem;
-      text-align: center;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .card-header .big-icon {
-      font-size: 52px;
-      color: var(--text-icon);
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-    .card-city { font-size: 26px; font-weight: 600; color: var(--text-city); }
-    .card-country {
-      display: inline-block;
-      margin-top: 6px;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.8px;
-      color: var(--text-country);
-      background: var(--country-bg);
-      padding: 3px 10px;
-      border-radius: 20px;
-    }
-
-    .card-body { padding: 0.5rem 1.5rem 1rem; }
-
     .data-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.7rem 0;
-      border-bottom: 1px solid var(--border-row);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid var(--border);
       transition: border-color 0.2s;
     }
     .data-row:last-child { border-bottom: none; }
-
     .data-label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--text-muted);
-      font-weight: 500;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--text-sec);
     }
-    .data-label i { font-size: 16px; }
-    .data-val { font-size: 14px; font-weight: 600; color: var(--text-val); }
-
-    .desc-badge {
-      display: inline-block;
-      padding: 3px 12px;
-      border-radius: 20px;
-      background: var(--bg-badge);
-      color: var(--text-badge);
-      border: 1px solid var(--border-bdg);
-      font-size: 13px;
-      font-weight: 500;
-      text-transform: capitalize;
-    }
+    .data-label i { font-size: 15px; }
+    .data-val { font-size: 13px; font-weight: 500; color: var(--text-pri); }
   </style>
 </head>
 <body>
 
   <nav class="navbar">
-    <i class="ti ti-cloud navbar-icon" aria-hidden="true"></i>
-    <span class="navbar-title">Weather Detector</span>
+    <div class="nav-avatar"><i class="ti ti-cloud" aria-hidden="true"></i></div>
+    <div class="nav-text">
+      <div class="nav-title">Weather Detector</div>
+      <div class="nav-sub">Live conditions worldwide</div>
+    </div>
     <button class="toggle-btn" onclick="toggleDark()" id="toggle-btn" aria-label="Toggle dark mode">
       <i class="ti ti-moon" id="toggle-icon" aria-hidden="true"></i>
-      <span id="toggle-label">Dark mode</span>
+      <span id="toggle-label">Dark</span>
     </button>
   </nav>
 
@@ -245,9 +193,10 @@
     <form action="" method="post">
       {% csrf_token %}
       <div class="search-row">
+        <i class="ti ti-search si" aria-hidden="true"></i>
         <input type="text" name="city" placeholder="Enter city name...">
         <button type="submit" aria-label="Search">
-          <i class="ti ti-search" aria-hidden="true"></i>
+          <i class="ti ti-arrow-right" aria-hidden="true"></i>
         </button>
       </div>
     </form>
@@ -260,44 +209,143 @@
     {% endif %}
 
     {% if data.country_code %}
-    <div class="weather-card">
-      <div class="card-header">
-        <i class="ti ti-cloud-storm big-icon" aria-hidden="true"></i>
-        <p class="card-city">{{ city }}</p>
-        <span class="card-country">{{ data.country_code }}</span>
+    <div class="hero-card">
+      <div class="hero-img" id="hero-bg"></div>
+      <div class="hero-overlay"></div>
+      <span class="hero-country">{{ data.country_code }}</span>
+      <div class="hero-content">
+        <div class="hero-loc"><i class="ti ti-map-pin" aria-hidden="true"></i> {{ city }}</div>
+        <p class="hero-city">{{ city }}</p>
+        <span class="hero-desc">
+          <i class="ti" id="weather-icon" aria-hidden="true"></i>
+          {{ data.description }}
+        </span>
       </div>
-      <div class="card-body">
-        <div class="data-row">
-          <span class="data-label"><i class="ti ti-map-pin" aria-hidden="true"></i> Coordinates</span>
-          <span class="data-val">{{ data.coordinate }}</span>
-        </div>
-        <div class="data-row">
-          <span class="data-label"><i class="ti ti-temperature" aria-hidden="true"></i> Temperature</span>
-          <span class="data-val">{{ data.temp }}</span>
-        </div>
-        <div class="data-row">
-          <span class="data-label"><i class="ti ti-gauge" aria-hidden="true"></i> Pressure</span>
-          <span class="data-val">{{ data.pressure }}</span>
-        </div>
-        <div class="data-row">
-          <span class="data-label"><i class="ti ti-droplet" aria-hidden="true"></i> Humidity</span>
-          <span class="data-val">{{ data.humidity }}</span>
-        </div>
-        <div class="data-row">
-          <span class="data-label"><i class="ti ti-wind" aria-hidden="true"></i> Description</span>
-          <span class="desc-badge">{{ data.description }}</span>
-        </div>
-        <div class="data-row">
-          <span class="data-label"><i class="ti ti-cloud" aria-hidden="true"></i> Precipitation</span>
-          <span class="data-val">{{ data.precipitation }}</span>
+      <div class="hero-temp">{{ data.temp_raw }}<sup>°</sup></div>
+    </div>
 
+    <div class="weather-card">
+      <div class="data-row">
+        <span class="data-label"><i class="ti ti-map-pin" aria-hidden="true"></i> Coordinates</span>
+        <span class="data-val">{{ data.coordinate }}</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label"><i class="ti ti-temperature" aria-hidden="true"></i> Temperature</span>
+        <span class="data-val">{{ data.temp }}</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label"><i class="ti ti-gauge" aria-hidden="true"></i> Pressure</span>
+        <span class="data-val">{{ data.pressure }}</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label"><i class="ti ti-droplet" aria-hidden="true"></i> Humidity</span>
+        <span class="data-val">{{ data.humidity }}</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label"><i class="ti ti-wind" aria-hidden="true"></i> Wind</span>
+        <span class="data-val">{{ data.wind }}</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label"><i class="ti ti-cloud-rain" aria-hidden="true"></i> Precipitation</span>
+        <span class="data-val">{{ data.precipitation }}</span>
       </div>
     </div>
+
+    <script>
+      (function () {
+        const desc = "{{ data.description|lower }}";
+
+        const WEATHER_MAP = {
+          thunderstorm: {
+            img: 'https://images.unsplash.com/photo-1605727216801-e27ce1d0cc28?w=900&q=80',
+            icon: 'ti-cloud-storm'
+          },
+          drizzle: {
+            img: 'https://images.unsplash.com/photo-1519692933481-e162a57d6721?w=900&q=80',
+            icon: 'ti-cloud-rain'
+          },
+          rain: {
+            img: 'https://images.unsplash.com/photo-1428592953211-077101b2021b?w=900&q=80',
+            icon: 'ti-cloud-rain'
+          },
+          snow: {
+            img: 'https://images.unsplash.com/photo-1491002052546-bf38f186af56?w=900&q=80',
+            icon: 'ti-snowflake'
+          },
+          'clear sky': {
+            img: 'https://images.unsplash.com/photo-1601297183305-6df142704ea2?w=900&q=80',
+            icon: 'ti-sun'
+          },
+          'few clouds': {
+            img: 'https://images.unsplash.com/photo-1560258018-c7db7645254e?w=900&q=80',
+            icon: 'ti-cloud'
+          },
+          'scattered clouds': {
+            img: 'https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=900&q=80',
+            icon: 'ti-cloud'
+          },
+          'broken clouds': {
+            img: 'https://images.unsplash.com/photo-1499956827185-0d63ee78a910?w=900&q=80',
+            icon: 'ti-cloud'
+          },
+          'overcast clouds': {
+            img: 'https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?w=900&q=80',
+            icon: 'ti-cloud-fog'
+          },
+          mist: {
+            img: 'https://images.unsplash.com/photo-1487621167305-5d248087c724?w=900&q=80',
+            icon: 'ti-cloud-fog'
+          },
+          fog: {
+            img: 'https://images.unsplash.com/photo-1487621167305-5d248087c724?w=900&q=80',
+            icon: 'ti-cloud-fog'
+          },
+          haze: {
+            img: 'https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=900&q=80',
+            icon: 'ti-haze'
+          },
+          smoke: {
+            img: 'https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=900&q=80',
+            icon: 'ti-haze'
+          },
+          dust: {
+            img: 'https://images.unsplash.com/photo-1590071089561-aa7b32f3d2c1?w=900&q=80',
+            icon: 'ti-wind'
+          },
+          sand: {
+            img: 'https://images.unsplash.com/photo-1590071089561-aa7b32f3d2c1?w=900&q=80',
+            icon: 'ti-wind'
+          },
+          squall: {
+            img: 'https://images.unsplash.com/photo-1605727216801-e27ce1d0cc28?w=900&q=80',
+            icon: 'ti-wind'
+          },
+          tornado: {
+            img: 'https://images.unsplash.com/photo-1561484930-998b6a7b22e8?w=900&q=80',
+            icon: 'ti-wind'
+          },
+        };
+
+        // Match by keyword in case API returns something like "light rain" or "moderate rain"
+        function getWeatherData(desc) {
+          for (const key of Object.keys(WEATHER_MAP)) {
+            if (desc.includes(key)) return WEATHER_MAP[key];
+          }
+          // default: clear sky
+          return WEATHER_MAP['clear sky'];
+        }
+
+        const match = getWeatherData(desc);
+
+        document.getElementById('hero-bg').style.backgroundImage = `url('${match.img}')`;
+        document.getElementById('weather-icon').classList.add(match.icon);
+      })();
+    </script>
     {% endif %}
+
   </div>
 
   <script>
-    const btn = document.getElementById('toggle-btn');
     const icon = document.getElementById('toggle-icon');
     const label = document.getElementById('toggle-label');
     let dark = localStorage.getItem('wa-dark') === 'true';
@@ -305,15 +353,13 @@
     function applyMode() {
       document.body.classList.toggle('dark', dark);
       icon.className = dark ? 'ti ti-sun' : 'ti ti-moon';
-      label.textContent = dark ? 'Light mode' : 'Dark mode';
+      label.textContent = dark ? 'Light' : 'Dark';
     }
-
     function toggleDark() {
       dark = !dark;
       localStorage.setItem('wa-dark', dark);
       applyMode();
     }
-
     applyMode();
   </script>
 
